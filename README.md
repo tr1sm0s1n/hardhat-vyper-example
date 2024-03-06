@@ -4,36 +4,34 @@ Example project to test/compile/deploy smart contracts written in Vyper using Ha
 
 ## 🛠 Built With
 
-<div align="left">
-<a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/nodejs.svg" width="36" height="36" alt="NodeJS" /></a>
-<a href="https://hardhat.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/hardhat.svg" width="36" height="36" alt="Hardhat" /></a>
-<a href="https://docs.vyperlang.org/en/stable/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/vyper.svg" width="36" height="36" alt="Vyper" /></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/DEMYSTIF/DEMYSTIF/main/assets/icons/javascript.svg" width="36" height="36" alt="JavaScript" /></a>
-</div>
+[![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)](https://nodejs.org/en/)
+[![Hardhat Badge](https://img.shields.io/badge/Hardhat-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)](https://hardhat.org/)
+[![Vyper Badge](https://img.shields.io/badge/Vyper-363636?logo=solidity&logoColor=fff&style=for-the-badge)](https://docs.vyperlang.org/en/stable/)
+[![JavaScript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/)
 
 ## ⚙️ Run Locally
 
 Clone the repository
 
 ```bash
-git clone https://github.com/DEMYSTIF/hardhat-vyper-example
+git clone https://github.com/tr1sm0s1n/hardhat-vyper-example
 cd hardhat-vyper-example
 ```
 
 Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 Test the contract
 
 ```bash
-npm run test
+pnpm test
 ```
 
-Deploy the contract (edit hardhat.config.js at first)
+Deploy the contract (edit hardhat.config.cjs at first)
 
 ```bash
-npm run deploy
+pnpm run deploy
 ```
