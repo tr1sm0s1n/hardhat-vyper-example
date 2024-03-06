@@ -3,10 +3,6 @@ require("@nomiclabs/hardhat-vyper");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: {
-    version: "0.8.18",
-  },
-  vyper: {
-    version: "0.3.7",
-  },
+  solidity: "0.8.24",
+  vyper: "0.3.10",
 };

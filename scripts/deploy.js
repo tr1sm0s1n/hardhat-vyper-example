@@ -4,35 +4,23 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const hre = require("hardhat");
-const fs = require("fs");
+import hre from "hardhat";
+import { writeFile } from "fs";
 
-async function main() {
-  const Cert = await hre.ethers.getContractFactory("Cert");
-  const cert = await Cert.deploy();
+const cert = await hre.ethers.deployContract("Cert");
 
-  await cert.deployed();
+await cert.waitForDeployment();
 
-  let details = {
-    deployer: cert.deployTransaction.from,
-    contract: cert.address,
-  };
+const details = {
+  deployer: cert.deploymentTransaction().from,
+  contract: await cert.getAddress(),
+};
 
-  console.log(
-    `Account: ${details.deployer} deployed Contract: ${details.contract}`
-  );
+console.log(`${details.deployer} deployed ${details.contract}`);
 
-  fs.writeFile("./details.json", JSON.stringify(details, null, 2), (err) => {
-    if (err) {
-      return console.log(err);
-    }
-    return console.log("Details are saved!!");
-  });
-}
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+writeFile("artifacts/details.json", JSON.stringify(details, null, 2), (err) => {
+  if (err) {
+    return console.log(err);
+  }
+  return console.log("Details are saved!!");
 });

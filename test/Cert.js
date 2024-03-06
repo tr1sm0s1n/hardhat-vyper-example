@@ -1,38 +1,57 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers.js";
+import chai from "chai";
+
+const { expect } = chai;
 
 describe("Cert", function () {
-  let cert;
-
-  it("Should deploy the contract", async function () {
-    const owner = await ethers.getSigner();
+  async function deployCertFixture() {
+    const [admin, other] = await ethers.getSigners();
 
     const Cert = await ethers.getContractFactory("Cert");
-    cert = await Cert.deploy();
+    const cert = await Cert.deploy();
 
-    expect(cert.deployTransaction.from).to.equal(owner.address);
+    return { cert, admin, other };
+  }
+
+  it("Should set the right admin", async function () {
+    const { cert, admin } = await loadFixture(deployCertFixture);
+
+    expect(cert.deploymentTransaction().from).to.equal(admin.address);
   });
 
   it("Should issue the certificate", async function () {
+    const { cert } = await loadFixture(deployCertFixture);
+
     await expect(
       cert.issue(
-        1024,
-        "Lindsey",
-        "TTE",
+        900,
+        "Langley",
+        "MBCC",
         "S",
         "2186-06-12",
         "0x2f44454d59535449462f6e6578742d63657274696669636174652d646170702f"
       )
     )
       .to.emit(cert, "Issued")
-      .withArgs(1024, "TTE", "2186-06-12");
+      .withArgs(900, "MBCC", "2186-06-12");
   });
 
   it("Should read the certificate", async function () {
-    const certificate = await cert.Certificates(1024);
+    const { cert } = await loadFixture(deployCertFixture);
 
-    expect(certificate[0]).to.equal("Lindsey");
-    expect(certificate[1]).to.equal("TTE");
+    await cert.issue(
+      900,
+      "Langley",
+      "MBCC",
+      "S",
+      "2186-06-12",
+      "0x2f44454d59535449462f6e6578742d63657274696669636174652d646170702f"
+    );
+
+    const certificate = await cert.Certificates(900);
+
+    expect(certificate[0]).to.equal("Langley");
+    expect(certificate[1]).to.equal("MBCC");
     expect(certificate[2]).to.equal("S");
     expect(certificate[3]).to.equal("2186-06-12");
     expect(certificate[4]).to.equal(
@@ -41,11 +60,11 @@ describe("Cert", function () {
   });
 
   it("Should revert the issuing", async function () {
-    const accounts = await ethers.getSigners();
+    const { cert, other } = await loadFixture(deployCertFixture);
 
     await expect(
       cert
-        .connect(accounts[1])
+        .connect(other)
         .issue(
           1024,
           "Abigail",
