@@ -6,7 +6,7 @@ Example project to test/compile/deploy smart contracts written in Vyper using Ha
 
 [![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)](https://nodejs.org/en/)
 [![Hardhat Badge](https://img.shields.io/badge/Hardhat-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)](https://hardhat.org/)
-[![Vyper Badge](https://img.shields.io/badge/Vyper-363636?logo=solidity&logoColor=fff&style=for-the-badge)](https://docs.vyperlang.org/en/stable/)
+[![Vyper Badge](https://img.shields.io/badge/Vyper-3C3C3D?logo=ethereum&logoColor=fff&style=for-the-badge)](https://docs.vyperlang.org/en/stable/)
 [![JavaScript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/)
 
 ## ⚙️ Run Locally
@@ -30,7 +30,7 @@ Test the contract
 pnpm test
 ```
 
-Deploy the contract (edit hardhat.config.cjs at first)
+Deploy the contract (edit [hardhat.config.cjs](hardhat.config.cjs) to specify a network if any)
 
 ```bash
 pnpm run deploy
